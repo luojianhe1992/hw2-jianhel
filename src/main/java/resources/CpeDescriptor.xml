@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+
+<cpeDescription xmlns="http://uima.apache.org/resourceSpecifier">
+
+
+
+	<!-- Collection Reader Descriptor -->
+    <collectionReader>
+        <collectionIterator>
+            <descriptor>
+                <import location="collectionReaderDescriptor.xml"/>
+            </descriptor>
+        </collectionIterator>
+    </collectionReader>
+    
+    
+    
+    
+    <casProcessors casPoolSize="3" processingUnitThreadCount="1">
+    
+    
+   <!-- Analysis Engine Descriptor of Lingpipe -->
+    <casProcessor deployment="integrated" name="aeDescriptorLingpipe.xml">
+        <descriptor>
+            <import location="aeDescriptorLingpipe.xml"/>
+        </descriptor>
+            <deploymentParameters/>
+        <errorHandling>
+            <errorRateThreshold action="terminate" value="0/1000"/>
+            <maxConsecutiveRestarts action="terminate" value="30"/>
+            <timeout max="100000" default="-1"/>
+        </errorHandling>
+        <checkpoint batch="10000" time="1000ms"/>
+    </casProcessor>
+    
+    
+    <!-- Analysis Engine Descriptor of Abner -->
+    <casProcessor deployment="integrated" name="aeAbnerAnalysisEngineDescriptor.xml">
+        <descriptor>
+            <import location="aeAbnerAnalysisEngineDescriptor.xml"/>
+        </descriptor>
+            <deploymentParameters/>
+        <errorHandling>
+            <errorRateThreshold action="terminate" value="0/1000"/>
+            <maxConsecutiveRestarts action="terminate" value="30"/>
+            <timeout max="100000" default="-1"/>
+        </errorHandling>
+        <checkpoint batch="10000" time="1000ms"/>
+    </casProcessor>
+    
+    
+    
+    
+    
+    
+    <!-- Cas Comsumer Descriptor -->
+    <casProcessor deployment="integrated" name="CasConsumerDescriptor">
+        <descriptor>
+            <import location="casConsumerDescriptor.xml"/>
+        </descriptor>
+            <deploymentParameters/>
+        <errorHandling>
+            <errorRateThreshold action="terminate" value="0/1000"/>
+            <maxConsecutiveRestarts action="terminate" value="30"/>
+            <timeout max="100000" default="-1"/>
+        </errorHandling>
+        <checkpoint batch="10000" time="1000ms"/>
+    </casProcessor>
+    </casProcessors>
+    <cpeConfig>
+        <numToProcess>-1</numToProcess>
+        <deployAs>immediate</deployAs>
+        <checkpoint batch="0" time="300000ms"/>
+        <timerImpl/>
+    </cpeConfig>
+</cpeDescription>
